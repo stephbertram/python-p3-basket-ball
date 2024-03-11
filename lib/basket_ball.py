@@ -1,3 +1,5 @@
+
+# DICTIONARY
 def game_dict():
     return {
         "home": {
@@ -182,3 +184,63 @@ def game_dict():
             ]
         }
     }
+
+# Dictionary of a Specific Player's Stats
+def player_stats(name):
+
+    data = game_dict()
+
+    # Iterates over the keys of the data dictionary, which are "home" and "away"
+    # Accesses the "players" key within that dictionary to retrieve the list of player data
+    for homeOrAway in data:
+        player_data = data[homeOrAway]['players']
+
+    # Iterates over each player in the player_data list
+        for player in player_data:
+            if player['name'] == name:
+                return player
+
+
+# Player Functions
+
+def num_points_per_game(name):
+    return player_stats(name)['points_per_game']
+
+def player_age(name):
+    return player_stats(name)['age']
+
+# Team Functions
+
+def team_colors(team_name):
+    data = game_dict()
+
+    # Iterates over the keys of the data dictionary, which are "home" and "away"
+    # Accesses the value associated with the current key ("home" or "away") and assigns it to the variable team. 
+    # This value is a dictionary containing information about a team.
+    for homeOrAway in data:
+        team = data[homeOrAway]
+        if team['team_name'] == team_name:
+            return team['colors']
+
+def team_names():
+    data = game_dict()
+    team_names=[]
+    for homeOrAway in data:
+        team_names.append(data[homeOrAway]['team_name'])
+    return team_names
+
+def player_numbers(team_name):
+    data = game_dict()
+    numbers = []
+    for homeOrAway in data:
+        if data[homeOrAway]['team_name'] == team_name:
+            for player in data[homeOrAway]['players']:
+                numbers.append(player['number'])
+    
+    return numbers
+
+
+# Print using $python lib/basket_ball.py
+print(num_points_per_game("Jarrett Allen"))
+
+
